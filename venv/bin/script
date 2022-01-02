@@ -1,0 +1,5 @@
+#!/mnt/d/pythonchik/!devman progs/api web services/lesson_1/venv/bin/python
+from wttr_package.main import main
+
+if __name__ == '__main__':
+    main()
