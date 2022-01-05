@@ -22,3 +22,6 @@ logs
 # Ignore system files
 Thumbs.db
 .DS_Store 
+
+# Ignore virtual environment
+venv/
