@@ -7,6 +7,8 @@
 Цвет **черно-белый**. 
 
 Запустить скрипт из консоли:
-1. `$ poetry build`
-2. `$ poetry install`
-3. `$ poetry run script`
+``` 
+    1. poetry build
+    2. poetry install
+    3. poetry run script
+```
