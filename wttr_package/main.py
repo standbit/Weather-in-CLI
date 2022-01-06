@@ -2,14 +2,14 @@ import requests
 
 
 URL_TEMPLATE = "http://wttr.in/{}"
-ADDRESS_LIST = [
+LOCATIONS = [
     "Лондон?nTqm&lang=ru",
     "Шереметьево?nTqm&lang=ru",
     "Череповец?nTqm&lang=ru"]
 
 
 def get_response():
-    for item in ADDRESS_LIST:
+    for item in LOCATIONS:
         url = URL_TEMPLATE.format(item)
         response = requests.get(url)
         print(response.text)
