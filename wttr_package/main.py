@@ -18,7 +18,13 @@ def get_response():
     for item in LOCATIONS:
         url = URL_TEMPLATE.format(item)
         response = requests.get(url, params=PAYLOAD)
-        print(response.text)
+        try:
+            response.raise_for_status()
+            if "error" in response.text:
+                raise requests.exceptions.HTTPError(response.text["error"])
+            print(response.text)
+        except Exception as e:
+            print('Ошибка при загрузке страницы: ' + str(e))
 
 
 def main():
