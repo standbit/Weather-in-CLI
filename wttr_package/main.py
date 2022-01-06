@@ -14,7 +14,7 @@ PAYLOAD = {
 }
 
 
-def get_response():
+def main():
     for item in LOCATIONS:
         url = URL_TEMPLATE.format(item)
         response = requests.get(url, params=PAYLOAD)
@@ -24,11 +24,7 @@ def get_response():
                 raise requests.exceptions.HTTPError(response.text["error"])
             print(response.text)
         except Exception as e:
-            print('Ошибка при загрузке страницы: ' + str(e))
-
-
-def main():
-    get_response()
+            print("Ошибка при загрузке страницы: " + str(e))
 
 
 if __name__ == "__main__":
