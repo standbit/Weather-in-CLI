@@ -6,28 +6,29 @@ def get_response(url):
         "nTqm": "",
         "lang": "ru"
         }
-    response = requests.get(url, params=payload)
-    return response
-
-
-def check_response(response):
     try:
+        response = requests.get(url, params=payload)
         response.raise_for_status()
         if "error" in response.text:
             raise requests.exceptions.HTTPError(response.text["error"])
-        return response.text
-    except Exception as e:
-        return "Ошибка при загрузке страницы: " + str(e)
+    except requests.exceptions.HTTPError as err:
+        print("General Error")
+        print(str(err))
+    except requests.ConnectionError as err:
+        print("Connection Error. Make sure you are connected to Internet.\n")
+        print(str(err))
+    return response.text
 
 
 def main():
     locations = [
-    "Лондон",
-    "Шереметьево",
-    "Череповец"]
+        "Лондон",
+        "Шереметьево",
+        "Череповец"
+        ]
     for location in locations:
         url = "http://wttr.in/{}".format(location)
-        print(check_response(get_response(url)))
+        print(get_response(url))
 
 
 if __name__ == "__main__":
