@@ -1,21 +1,12 @@
 import requests
 
 
-URL_TEMPLATE = "http://wttr.in/{}"
-
-LOCATIONS = [
-    "Лондон",
-    "Шереметьево",
-    "Череповец"]
-
-PAYLOAD = {
-    "nTqm": "",
-    "lang": "ru"
-}
-
-
 def get_response(url):
-    response = requests.get(url, params=PAYLOAD)
+    payload = {
+        "nTqm": "",
+        "lang": "ru"
+        }
+    response = requests.get(url, params=payload)
     return response
 
 
@@ -30,8 +21,12 @@ def check_response(response):
 
 
 def main():
-    for item in LOCATIONS:
-        url = URL_TEMPLATE.format(item)
+    locations = [
+    "Лондон",
+    "Шереметьево",
+    "Череповец"]
+    for location in locations:
+        url = "http://wttr.in/{}".format(location)
         print(check_response(get_response(url)))
 
 
