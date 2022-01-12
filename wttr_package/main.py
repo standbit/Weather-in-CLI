@@ -6,17 +6,10 @@ def get_response(url):
         "nTqm": "",
         "lang": "ru"
         }
-    try:
-        response = requests.get(url, params=payload)
-        response.raise_for_status()
-        if "error" in response.text:
-            raise requests.exceptions.HTTPError(response.text["error"])
-    except requests.exceptions.HTTPError as err:
-        print("General Error")
-        print(str(err))
-    except requests.ConnectionError as err:
-        print("Connection Error. Make sure you are connected to Internet.\n")
-        print(str(err))
+    response = requests.get(url, params=payload)
+    response.raise_for_status()
+    if "error" in response.text:
+        raise requests.exceptions.HTTPError(response.text["error"])
     return response.text
 
 
@@ -26,9 +19,14 @@ def main():
         "Шереметьево",
         "Череповец"
         ]
-    for location in locations:
-        url = "http://wttr.in/{}".format(location)
-        print(get_response(url))
+    try:
+        for location in locations:
+            url = "http://wttr.in/{}".format(location)
+            print(get_response(url))
+    except requests.exceptions.HTTPError as err:
+        print("General Error\n", str(err))
+    except requests.ConnectionError as err:
+        print("Connection Error. Check Internet connection.\n", str(err))
 
 
 if __name__ == "__main__":
