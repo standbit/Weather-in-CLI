@@ -9,7 +9,7 @@ def get_response(url):
     response = requests.get(url, params=payload)
     response.raise_for_status()
     if "error" in response.text:
-        raise requests.exceptions.HTTPError(response.text["error"])
+        raise requests.exceptions.HTTPError(response.text)
     return response.text
 
 
@@ -19,14 +19,14 @@ def main():
         "Шереметьево",
         "Череповец"
         ]
-    try:
-        for location in locations:
+    for location in locations:
+        try:
             url = "http://wttr.in/{}".format(location)
             print(get_response(url))
-    except requests.exceptions.HTTPError as err:
-        print("General Error\n", str(err))
-    except requests.ConnectionError as err:
-        print("Connection Error. Check Internet connection.\n", str(err))
+        except requests.exceptions.HTTPError as err:
+            print("General Error\n", str(err))
+        except requests.ConnectionError as err:
+            print("Connection Error. Check Internet connection.\n", str(err))
 
 
 if __name__ == "__main__":
